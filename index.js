@@ -6,7 +6,8 @@ const morgan =require('morgan')
 
 
 app.use(express.json())
-app.use(morgan('tiny'))
+morgan.token('body',(req)=>{return JSON.stringify(req.body)})
+app.use(morgan(':method :url :status :response-time ms :body'))
 
 let persons = [
     {
@@ -35,7 +36,7 @@ app.get('/api/persons', (req, res) => {
     res.json(persons)
 })
 // SHOW PERSONS COUNT + TIME STAMP
-app.get('/info', (req, res) => {
+app.get('/info', (res) => {
     const Personscount = persons.length
     const date = new Date().toString()
     res.send(`
