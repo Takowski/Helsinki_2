@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
 const morgan =require('morgan')
+const cors = require('cors')
 
+app.use(express.static('dist'))
 
-
-
+app.use(cors())
 app.use(express.json())
 morgan.token('body',(req)=>{return JSON.stringify(req.body)})
 app.use(morgan(':method :url :status :response-time ms :body'))
@@ -84,8 +85,7 @@ if(personAlreadyExist){
     res.json(person)
 })
 
-
-const Port = 3001
-app.listen(Port, () => {
-    console.log(`Server running on port ${Port}`)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 })
