@@ -1,1 +1,3 @@
-/dist
+dist
+build release
+node_module/
