@@ -61,14 +61,14 @@ app.get('/info', (req,res) => {
 //     } else {
 //         res.status(404).end()
 //     }
-
 // })
-// //DELETE A PERSON WITH ID 
-// app.delete('/api/persons/:id', (req, res) => {
-//     const id = Number(req.params.id)
-//     persons = persons.filter(person => person.id !== id)
-//     res.status(204).end()
-// })
+//DELETE A PERSON WITH ID 
+app.delete('/api/persons/:id', (req, res) => {
+    Person.findByIdAndDelete(req.params.id)
+    .then(result=>{
+        res.status(204).end()
+    })
+})
 //POST A NEW PERSON 
 app.post('/api/persons', (request, response) => {
     const body = request.body
